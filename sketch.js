@@ -9,9 +9,10 @@ var backgroundImg,platform,bg;
 var bird, slingshot;
 
 var gameState = "onSling";
+//var score = 0;
 
 function preload() {
-    backgroundImg = loadImage("sprites/bg.png");
+    backgroundImg = loadImage("sprites/school.jpg");
     getTime();
 }
 
@@ -22,58 +23,67 @@ function setup(){
 
 
     ground = new Ground(600,height,1200,20);
-    platform = new Ground(150, 305, 300, 170);
+    platform = new Ground(810, 280, 300, 10);
 
-    box1 = new Box(700,320,70,70);
-    box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810,260,300, PI/2);
+    box1 = new Box(700,245,70,70);
+    box2 = new Box(920,245,70,70);
+    frnd1 = new Frnd(810,255);
+    log1 = new Log(810,200,300, PI/2);
 
-    box3 = new Box(700,240,70,70);
-    box4 = new Box(920,240,70,70);
-    pig3 = new Pig(810, 220);
+    box3 = new Box(700,155,70,70);
+    box4 = new Box(920,155,70,70);
+    frnd2 = new Frnd(810,165);
 
-    log3 =  new Log(810,180,300, PI/2);
+    log3 =  new Log(810,145,300, PI/2);
 
-    box5 = new Box(810,160,70,70);
-    log4 = new Log(760,120,150, PI/7);
-    log5 = new Log(870,120,150, -PI/7);
+    box5 = new Box(810,100,70,70);
+    log4 = new Log(760,60,150, PI/7);
+    log5 = new Log(870,60,150, -PI/7);
 
-    bird = new Bird(200,50);
+    me = new Me(200,130);
 
     //log6 = new Log(230,180,80, PI/2);
-    slingshot = new SlingShot(bird.body,{x:200, y:50});
+    slingshot = new SlingShot(me.body,{x:200, y:130});
 }
 
 function draw(){
-    background(backgroundImg);
+    if(backgroundImg)
+            background(backgroundImg);
+        
+          //  noStroke();
+           // textSize(35)
+          // fill("white")
+          //  text("Score :  " + score, width-300, 50)
     Engine.update(engine);
     //strokeWeight(4);
     box1.display();
     box2.display();
     ground.display();
-    pig1.display();
+    frnd1.display();
+    //frnd1.score();
     log1.display();
 
     box3.display();
     box4.display();
-    pig3.display();
+    frnd2.display();
+    //frnd2.score();
     log3.display();
 
     box5.display();
     log4.display();
     log5.display();
 
-    bird.display();
+    me.display();
     platform.display();
     //log6.display();
-    slingshot.display();    
+    slingshot.display();  
+   
 }
-
 function mouseDragged(){
-    if (gameState!=="launched"){
-        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-    }
+    //if (gameState!=="launched"){
+        Matter.Body.setPosition(me.body, {x: mouseX , y: mouseY});
+       // console.log(7)
+    
 }
 
 
@@ -84,7 +94,9 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
-       // slingshot.attach(bird.body);
+        me.trajectory = [];
+        slingshot.attach(me.body);
+        Matter.Body.setPosition(me.body,{x:200, y:130});
     }
 }
  async function getTime(){
@@ -96,9 +108,9 @@ function keyPressed(){
     var r = dt.slice(11,13);
     console.log(r);
     if (r>=06&&r<=18){
-       bg = "sprites/bg2.jpg";
+       bg = "sprites/school.jpg";
     }else{
-        bg = "sprites/bg.png";
+        bg = "sprites/home.jpg";
     }
     backgroundImg = loadImage(bg);
 }
