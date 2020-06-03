@@ -9,7 +9,7 @@ var backgroundImg,platform,bg;
 var bird, slingshot;
 
 var gameState = "onSling";
-//var score = 0;
+var score = 0;
 
 function preload() {
     backgroundImg = loadImage("sprites/school.jpg");
@@ -23,22 +23,22 @@ function setup(){
 
 
     ground = new Ground(600,height,1200,20);
-    platform = new Ground(810, 280, 300, 10);
+    platform = new Ground(810, 320, 300, 10);
 
-    box1 = new Box(700,245,70,70);
-    box2 = new Box(920,245,70,70);
-    frnd1 = new Frnd(810,255);
-    log1 = new Log(810,200,300, PI/2);
+    box1 = new Box(700,285,70,70);
+    box2 = new Box(920,285,70,70);
+    frnd1 = new Frnd(810,295);
+    log1 = new Log(810,240,300, PI/2);
 
-    box3 = new Box(700,155,70,70);
-    box4 = new Box(920,155,70,70);
-    frnd2 = new Frnd(810,165);
+    box3 = new Box(700,195,70,70);
+    box4 = new Box(920,195,70,70);
+    frnd2 = new Frnd(810,205);
 
-    log3 =  new Log(810,145,300, PI/2);
+    log3 =  new Log(810,185,300, PI/2);
 
-    box5 = new Box(810,100,70,70);
-    log4 = new Log(760,60,150, PI/7);
-    log5 = new Log(870,60,150, -PI/7);
+    box5 = new Box(810,140,70,70);
+    log4 = new Log(760,100,150, PI/7);
+    log5 = new Log(870,100,150, -PI/7);
 
     me = new Me(200,130);
 
@@ -50,23 +50,23 @@ function draw(){
     if(backgroundImg)
             background(backgroundImg);
         
-          //  noStroke();
-           // textSize(35)
-          // fill("white")
-          //  text("Score :  " + score, width-300, 50)
+            noStroke();
+            textSize(35)
+           fill("white")
+            text("Score :  " + score, width-300, 50)
     Engine.update(engine);
     //strokeWeight(4);
     box1.display();
     box2.display();
     ground.display();
     frnd1.display();
-    //frnd1.score();
+    frnd1.score();
     log1.display();
 
     box3.display();
     box4.display();
     frnd2.display();
-    //frnd2.score();
+    frnd2.score();
     log3.display();
 
     box5.display();
